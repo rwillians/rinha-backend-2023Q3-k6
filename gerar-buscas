@@ -1,0 +1,9 @@
+#! /usr/bin/env node
+
+const { gerarTermoDeBusca } = require('./src/gerador-de-carga.js')
+
+const max = parseInt(process.argv.slice(2)[0] || '100000');
+
+for (let i = 0; i < max; i++) {
+  process.stdout.write(gerarTermoDeBusca() + '\n')
+}

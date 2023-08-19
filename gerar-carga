@@ -1,0 +1,2 @@
+./gerar-pessoas > ./data/pessoas-payloads.tsv
+./gerar-buscas > ./data/termos-busca.tsv
