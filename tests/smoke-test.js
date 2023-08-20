@@ -7,10 +7,10 @@ import http from 'k6/http';
 export const options = {
   thresholds: {
     'http_req_failed{expected_response:true}': ['rate<0.01'],
-    'http_req_duration{name:CriarPessoa}': ['p(99)<251'],
-    'http_req_duration{name:Busca}': ['p(99)<251'],
-    'http_req_duration{name:PesquisaValida}': ['p(99)<1001'],
-    'http_req_duration{name:PesquisaInvalida}': ['p(99)<251'],
+    'http_req_duration{name:CriarPessoa}': ['p(99)<100'],
+    'http_req_duration{name:Busca}': ['p(99)<100'],
+    'http_req_duration{name:PesquisaValida}': ['p(99)<100'],
+    'http_req_duration{name:PesquisaInvalida}': ['p(99)<100'],
   },
   summaryTrendStats: ['count', 'min', 'avg', 'med', 'max', 'p(95)', 'p(99)'],
   scenarios: {
