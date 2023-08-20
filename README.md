@@ -42,6 +42,8 @@ Testes de stress e de breaking point para a Rinha de Backend 2023Q3, escritos ut
 
     > **Note**
     > Voce pode -- e recomendo -- conectar seu CLI do K6 com sua conta do Grafana Cloud, onde você poderá ver aqueles relatórios bonitinhos com gráficos e tals. A conta pode ser o plano gratuito mesmo. ([como faz?](https://k6.io/docs/results-output/real-time/cloud/)).
+    >
+    > TL;DR: `k6 login cloud -t <token>`
 
 6.  Suba sua API;
 
