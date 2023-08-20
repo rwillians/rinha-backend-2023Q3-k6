@@ -41,9 +41,7 @@ Testes de stress e de breaking point para a Rinha de Backend 2023Q3, escritos ut
 5.  Instale o CLI do K6 ([instruções aqui](https://k6.io/docs/get-started/installation/)).
 
     > **Note**
-    > Voce pode -- e recomendo -- conectar seu CLI do K6 com sua conta do Grafana Cloud, onde você poderá ver aqueles relatórios bonitinhos com gráficos e tals. A conta pode ser o plano gratuito mesmo.
-    >
-    > Para conectar ou criar sua conta, execute o comando `k6 login`.
+    > Voce pode -- e recomendo -- conectar seu CLI do K6 com sua conta do Grafana Cloud, onde você poderá ver aqueles relatórios bonitinhos com gráficos e tals. A conta pode ser o plano gratuito mesmo. ([como faz?](https://k6.io/docs/results-output/real-time/cloud/)).
 
 6.  Suba sua API;
 
