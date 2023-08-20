@@ -50,15 +50,15 @@ Testes de stress e de breaking point para a Rinha de Backend 2023Q3, escritos ut
 7.  Quando usa API estiver pronta para receber requisições, execute o teste com o comando:
 
     ```sh
-    k6 run tests/teste-de-breakpoint.js
+    k6 run tests/breakpoint-test.js
     ```
 
     Caso você tenha conectado sua conta do Grafana Cloud, utilize o comando:
 
     ```sh
-    k6 run --out=cloud tests/teste-de-breakpoint.js
+    k6 run --out=cloud tests/breakpoint-test.js
     ```
 
-Para executar o teste de estresse, é a mesma coisa mas ao invés de rodar `k6 run tests/teste-de-breakpoint.js` você rodará `k6 run tests/teste-de-stress.js`.
+Para executar o teste de "stress" ou "smoke", é a mesma coisa mas ao invés de rodar `k6 run tests/breakpoint-test.js` você rodará `k6 run tests/stress-test.js` ou `k6 run tests/smoke-test.js`.
 
 
