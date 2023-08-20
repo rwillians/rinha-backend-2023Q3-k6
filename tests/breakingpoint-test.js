@@ -121,7 +121,7 @@ export function pesquisaInvalida () {
 
 export function handleSummary(data) {
   return {
-    'data/results.json': JSON.stringify(data, null, 2),
+    'results.json': JSON.stringify(data, null, 2),
     stdout: textSummary(data, { enableColors: true })
   };
 }

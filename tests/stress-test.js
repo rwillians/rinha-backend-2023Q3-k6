@@ -18,9 +18,9 @@ export const options = {
     CriaEBuscaPessoa: {
       executor: 'ramping-vus',
       stages: [
-        { duration: '180s', target: 72 },
-        { duration: '180s', target: 72 },
-        { duration: '45s', target: 0 },
+        { duration: '60s', target: 72 },
+        { duration: '120s', target: 72 },
+        { duration: '30s', target: 0 },
       ],
       startVUs: 4,
       exec: 'criarEBuscarPessoa',
@@ -29,9 +29,9 @@ export const options = {
     PesquisaValida: {
       executor: 'ramping-vus',
       stages: [
-        { duration: '180s', target: 12 },
-        { duration: '180s', target: 12 },
-        { duration: '45s', target: 0}
+        { duration: '60s', target: 12 },
+        { duration: '120s', target: 12 },
+        { duration: '30s', target: 0}
       ],
       startVUs: 1,
       exec: 'pesquisaValida',
@@ -40,9 +40,9 @@ export const options = {
     PesquisaInvalida: {
       executor: 'ramping-vus',
       stages: [
-        { duration: '180s', target: 2 },
-        { duration: '180s', target: 2 },
-        { duration: '45s', target: 0 }
+        { duration: '60s', target: 2 },
+        { duration: '120s', target: 2 },
+        { duration: '30s', target: 0 }
       ],
       startVUs: 1,
       exec: 'pesquisaInvalida',
@@ -131,7 +131,7 @@ export function pesquisaInvalida () {
 
 export function handleSummary(data) {
   return {
-    'data/results.json': JSON.stringify(data, null, 2),
+    'results.json': JSON.stringify(data, null, 2),
     stdout: textSummary(data, { enableColors: true })
   };
 }
