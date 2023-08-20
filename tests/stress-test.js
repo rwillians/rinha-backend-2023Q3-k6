@@ -77,7 +77,7 @@ export function criarEBuscarPessoa () {
     const [,, id] = location.split('/');
 
     group('Busca pessoa criada', () => {
-      const res = http.get(url`http://127.0.0.1:9999/pessoas/${id}`, {
+      http.get(url`http://127.0.0.1:9999/pessoas/${id}`, {
         responseCallback: http.expectedStatuses(200),
         tags: { name: 'Busca' }
       });
@@ -89,40 +89,16 @@ export function pesquisaValida () {
   group('Pesquisa termo em /pessoas?t={termo}', () => {
     const termo = encodeURIComponent(termosDeBusca[exec.scenario.iterationInTest]);
 
-    const res = http.get(url`http://127.0.0.1:9999/pessoas?pagina=0&limite=5&t=${termo}`, {
+    http.get(url`http://127.0.0.1:9999/pessoas?pagina=0&limite=5&t=${termo}`, {
       responseCallback: http.expectedStatuses(200),
       tags: { name: 'PesquisaValida' }
     });
-
-    // if (res.status !== 200) {
-    //   return;
-    // }
-
-    // group('Busca pessoas retornadas na pesquisa', () => {
-    //   const requests = JSON
-    //     .parse(res.body)
-    //     .resultados
-    //     .map(({ id }) => [
-    //       'GET',
-    //       url`http://127.0.0.1:9999/pessoas/${id}`,
-    //       null,
-    //       { responseCallback: http.expectedStatuses(200) }
-    //     ])
-    //
-    //   const reqsLength = requests.length
-    //
-    //   if (reqsLength === 0) {
-    //     return;
-    //   }
-    //
-    //   http.batch(requests)
-    // })
   })
 }
 
 export function pesquisaInvalida () {
   group('Pesquisa inválida', () => {
-    const res = http.get(`http://127.0.0.1:9999/pessoas`, {
+    http.get(`http://127.0.0.1:9999/pessoas`, {
       responseCallback: http.expectedStatuses(400),
       tags: { name: 'PesquisaInvalida' }
     });

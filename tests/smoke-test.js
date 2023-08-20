@@ -16,7 +16,7 @@ export const options = {
   scenarios: {
     criaBuscaPesquisa: {
       executor: 'constant-vus',
-      duration: '180s',
+      duration: '60s',
       vus: 1,
       exec: 'criaBuscaPesquisa'
     }
