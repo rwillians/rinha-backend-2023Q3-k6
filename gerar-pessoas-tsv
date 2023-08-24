@@ -1,0 +1,40 @@
+#! /usr/bin/env node
+
+const { v4: uuid } = require('uuid')
+const { gerarPessoaValida } = require('./src/gerador-de-carga.js')
+
+// `scripts/gerar-pessas 50000` gera 50k pessoas
+// `scripts/gerar-pessas 10` gera 10 pessoas
+// `scripts/gerar-pessas` gera 250k pessoas (padrão)
+const max = parseInt(process.argv.slice(2)[0] || '250000');
+
+process.stdout.write('id\tnome\tapelido\tnascimento\tstack\tpesquisa\n')
+
+const apelidos = {}
+
+for (let i = 0; i < max; i++) {
+  const p = gerarPessoaValida()
+  const id = uuid()
+
+  if (apelidos[p.apelido] !== undefined) {
+    continue;
+  }
+
+  if (p.apelido.length > 32) {
+    continue;
+  }
+
+  const stack = !!p.stack
+    ? ('{' + p.stack.join(',') + '}')
+    : ''
+
+  const pesquisa = (
+      p.nome +
+        ' ' + p.apelido +
+        (!!p.stack ? ' ' + (p.stack.join(' ')) : '')
+    ).toLocaleLowerCase()
+
+  Object.assign(apelidos, { [p.apelido]: true })
+
+  process.stdout.write(`${id}\t${p.nome}\t${p.apelido}\t${p.nascimento}\t${stack}\t${pesquisa}` + '\n')
+}

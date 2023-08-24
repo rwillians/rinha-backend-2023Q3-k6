@@ -121,6 +121,17 @@ function gerarPessoa() {
   }
 }
 
+function gerarPessoaValida() {
+  const rand = ~~(Math.random() * 100);
+
+  return {
+    nome: getValidNome(),
+    apelido: getValidApelido() + rand,
+    nascimento: getValidNascimento(),
+    stack: getValidStack()
+  }
+}
+
 const randFrom1To16 = pickRandFactory([1, 2, 3, 4, 5, 6, 7, 8, 9,
                                        10, 11, 12, 13, 14, 15, 16])
 
@@ -159,4 +170,4 @@ function gerarTermoDeBusca() {
 // EXPORTS
 //
 
-module.exports = { gerarPessoa, gerarTermoDeBusca }
+module.exports = { gerarPessoa, gerarPessoaValida, gerarTermoDeBusca }

@@ -17,19 +17,19 @@ export const options = {
     CriaEBuscaPessoa: {
       executor: 'ramping-vus',
       stages: [
-        { duration: '60s', target: 32 },
-        { duration: '120s', target: 32 },
+        { duration: '60s', target: 6 },
+        { duration: '120s', target: 6 },
         { duration: '30s', target: 0 },
       ],
-      startVUs: 4,
+      startVUs: 1,
       exec: 'criarEBuscarPessoa',
       gracefulRampDown: '3s'
     },
     PesquisaValida: {
       executor: 'ramping-vus',
       stages: [
-        { duration: '60s', target: 8 },
-        { duration: '120s', target: 8 },
+        { duration: '60s', target: 3 },
+        { duration: '120s', target: 3 },
         { duration: '30s', target: 0}
       ],
       startVUs: 1,
@@ -39,8 +39,8 @@ export const options = {
     PesquisaInvalida: {
       executor: 'ramping-vus',
       stages: [
-        { duration: '60s', target: 2 },
-        { duration: '120s', target: 2 },
+        { duration: '60s', target: 1 },
+        { duration: '120s', target: 1 },
         { duration: '30s', target: 0 }
       ],
       startVUs: 1,
@@ -50,8 +50,8 @@ export const options = {
   }
 };
 
-const pessoas = new SharedArray('pessoas-payloads.tsv', function () {
-  return open('../resources/pessoas-payloads.tsv').split('\n').slice(1);
+const pessoas = new SharedArray('pessoas-payloads.jsonl', function () {
+  return open('../resources/pessoas-payloads.jsonl').split('\n').slice(1);
 });
 
 const termosDeBusca = new SharedArray('termos-busca.tsv', function () {
@@ -61,7 +61,7 @@ const termosDeBusca = new SharedArray('termos-busca.tsv', function () {
 export function criarEBuscarPessoa () {
   const payload = pessoas[exec.scenario.iterationInTest]; // sequencial
 
-  const res = http.post('http://127.0.0.1:9999/pessoas', payload, {
+  const res = http.post(url`http://127.0.0.1:3000/pessoas`, payload, {
     headers: { 'Content-Type': 'application/json' },
     responseCallback: http.expectedStatuses(201, 422),
     tags: { name: 'CriarPessoa' }
@@ -74,7 +74,7 @@ export function criarEBuscarPessoa () {
   const location = res.headers['Location'];
   const [,, id] = location.split('/');
 
-  http.get(url`http://127.0.0.1:9999/pessoas/${id}`, {
+  http.get(url`http://127.0.0.1:3000/pessoas/${id}`, {
     responseCallback: http.expectedStatuses(200),
     tags: { name: 'Busca' }
   });
@@ -83,14 +83,14 @@ export function criarEBuscarPessoa () {
 export function pesquisaValida () {
   const termo = encodeURIComponent(termosDeBusca[exec.scenario.iterationInTest]);
 
-  http.get(url`http://127.0.0.1:9999/pessoas?pagina=0&limite=5&t=${termo}`, {
+  http.get(url`http://127.0.0.1:3000/pessoas?pagina=0&limite=50&t=${termo}`, {
     responseCallback: http.expectedStatuses(200),
-    tags: { name: 'PesquisaValida' }
+    tags: { name: 'PesquisaValida'}
   });
 }
 
 export function pesquisaInvalida () {
-  http.get(`http://127.0.0.1:9999/pessoas`, {
+  http.get(url`http://127.0.0.1:3000/pessoas`, {
     responseCallback: http.expectedStatuses(400),
     tags: { name: 'PesquisaInvalida' }
   });

@@ -1,6 +1,6 @@
 #! /usr/bin/env sh
 
-k6 run tests/teste-de-stress.js
+k6 run tests/stress-test.js
 
 sleep 3
 

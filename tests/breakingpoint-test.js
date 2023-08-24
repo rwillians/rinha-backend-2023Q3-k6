@@ -41,8 +41,8 @@ export const options = {
   }
 };
 
-const pessoas = new SharedArray('pessoas-payloads.tsv', function () {
-  return open('../resources/pessoas-payloads.tsv').split('\n').slice(1);
+const pessoas = new SharedArray('pessoas-payloads.jsonl', function () {
+  return open('../resources/pessoas-payloads.jsonl').split('\n').slice(1);
 });
 
 const termosDeBusca = new SharedArray('termos-busca.tsv', function () {
@@ -52,7 +52,7 @@ const termosDeBusca = new SharedArray('termos-busca.tsv', function () {
 export function criarETalvezBuscarPessoa () {
   const payload = pessoas[exec.scenario.iterationInTest]; // sequencial
 
-  const res = http.post('http://127.0.0.1:9999/pessoas', payload, {
+  const res = http.post(url`http://127.0.0.1:9999/pessoas`, payload, {
     headers: { 'Content-Type': 'application/json' },
     responseCallback: http.expectedStatuses(201, 422),
     tags: { name: 'CriarPessoa' }
@@ -74,14 +74,14 @@ export function criarETalvezBuscarPessoa () {
 export function pesquisaValida () {
   const termo = encodeURIComponent(termosDeBusca[exec.scenario.iterationInTest]);
 
-  http.get(url`http://127.0.0.1:9999/pessoas?pagina=0&limite=5&t=${termo}`, {
+  http.get(url`http://127.0.0.1:9999/pessoas?pagina=0&limite=50&t=${termo}`, {
     responseCallback: http.expectedStatuses(200),
     tags: { name: 'PesquisaValida' }
   });
 }
 
 export function pesquisaInvalida () {
-  http.get(`http://127.0.0.1:9999/pessoas`, {
+  http.get(url`http://127.0.0.1:9999/pessoas`, {
     responseCallback: http.expectedStatuses(400),
     tags: { name: 'PesquisaInvalida' }
   });

@@ -1,2 +1,2 @@
-./gerar-pessoas > ./resources/pessoas-payloads.tsv
-./gerar-buscas > ./resources/termos-busca.tsv
+./gerar-pessoas-jsonl 5000000 > ./resources/pessoas-payloads.jsonl
+./gerar-buscas 1000000 > ./resources/termos-busca.tsv
